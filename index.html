@@ -610,6 +610,104 @@
             max-height: 2000px;
         }
 
+        /* About Section */
+        .about-section {
+            margin: 0 0 20px 0;
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, rgba(30,30,30,0.6) 100%);
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            overflow: hidden;
+        }
+
+        .about-toggle {
+            width: 100%;
+            padding: 14px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s ease;
+        }
+
+        .about-toggle:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .about-toggle::after {
+            content: '▼';
+            margin-left: auto;
+            font-size: 10px;
+            transition: transform 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .about-toggle.open::after {
+            transform: rotate(180deg);
+        }
+
+        .about-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+
+        .about-content.open {
+            max-height: 600px;
+        }
+
+        .about-inner {
+            padding: 0 24px 24px;
+        }
+
+        .about-cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .about-col {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 18px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .about-col h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #3b82f6;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .about-col p, .about-col li {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .about-col ol, .about-col ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .about-col ol li, .about-col ul li {
+            margin-bottom: 6px;
+        }
+
+        .about-col strong {
+            color: var(--text-primary);
+        }
+
         .setup-inner {
             padding: 20px 24px 30px;
             display: grid;
@@ -1324,7 +1422,7 @@
             background: rgba(0, 0, 0, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
-            padding: 6px 10px;
+            padding: 8px 12px;
             font-size: 11px;
             color: #fff;
             pointer-events: none;
@@ -1332,6 +1430,7 @@
             opacity: 0;
             transition: opacity 0.15s ease;
             white-space: nowrap;
+            line-height: 1.5;
         }
 
         .auto-tooltip.visible {
@@ -1339,8 +1438,9 @@
         }
 
         .auto-tooltip .auto-param {
-            color: #4a90e2;
+            color: #fbbf24;
             font-weight: 600;
+            font-size: 12px;
         }
 
         .auto-tooltip .auto-value {
@@ -1351,6 +1451,11 @@
 
         .auto-tooltip .auto-bar {
             color: #a78bfa;
+        }
+        
+        .auto-tooltip strong {
+            color: #38bdf8;
+            font-size: 12px;
         }
 
         /* Automation Toggle */
@@ -1531,6 +1636,16 @@
             r: 7;
         }
 
+        .automation-path .auto-point {
+            cursor: pointer;
+            transition: r 0.15s ease;
+            pointer-events: auto;
+        }
+
+        .automation-path .auto-point:hover {
+            r: 7;
+        }
+
         /* Section Divider - for routing/automation sections */
         .track-label.section-divider {
             height: 40px;
@@ -1660,6 +1775,43 @@
                 <span>BPM <span class="value" id="bpm-value">124</span></span>
                 <span>KEY <span class="value">Am</span></span>
                 <span>BARS <span class="value" id="bar-count">224</span></span>
+            </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div class="about-section">
+            <button class="about-toggle" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('open')">
+                ℹ️ How to Use These Templates
+            </button>
+            <div class="about-content">
+                <div class="about-inner">
+                    <div class="about-cols">
+                        <div class="about-col">
+                            <h3>What This Is</h3>
+                            <p>Visual arrangement templates for the <strong>Elektron Tonverk</strong> (and Syntakt) using <strong>Song Mode</strong> with 256-step patterns (16 bars each).</p>
+                            <p>Each template shows a complete arrangement with automation curves you can recreate using <strong>trigless trigs with p-locks</strong> and <strong>LFOs</strong>.</p>
+                        </div>
+                        <div class="about-col">
+                            <h3>The Workflow</h3>
+                            <ol>
+                                <li><strong>Pick a genre</strong> — each has different energy curves</li>
+                                <li><strong>Turn on Automation</strong> — see the FX moves</li>
+                                <li><strong>Hover the dots</strong> — each dot is a trigless trig with all the data you need: Pattern, Step, value, and LFO settings</li>
+                                <li><strong>Program your Tonverk</strong> — place trigless trigs at those steps with the p-lock values shown</li>
+                            </ol>
+                        </div>
+                        <div class="about-col">
+                            <h3>Quick LFO Tip</h3>
+                            <p>For smooth automation rises:</p>
+                            <ul>
+                                <li><strong>Waveform:</strong> ENV (one-shot ramp)</li>
+                                <li><strong>Mode:</strong> TRG (restart on pattern)</li>
+                                <li><strong>SPD × MULT = 8</strong> for 16-bar sweep</li>
+                                <li><strong>DEP</strong> = how much % change you want</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1943,6 +2095,22 @@
                                 <strong>💡 Signal Flow:</strong> Tonverk sends dry to C/D → Syntakt adds delay/verb → Returns to Tonverk master bus for glue compression. This gives external FX character while maintaining cohesive master.
                             </div>
                         </div>
+
+                        <div class="setup-section">
+                            <h3>LFO Timing Reference (One-Shot Ramp for Automation)</h3>
+                            <p style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">SPD × MULT = cycle length. Use ENV waveform for one-shot rises, TRG mode to restart on pattern start.</p>
+                            <table class="pattern-table">
+                                <tr><th>Cycle Length</th><th>Steps</th><th>SPD</th><th>MULT</th><th>Use Case</th></tr>
+                                <tr><td class="pattern-id">1 bar</td><td class="pattern-name">16</td><td class="pattern-use">16</td><td class="pattern-use">×8</td><td class="pattern-use">Fast filter sweeps</td></tr>
+                                <tr><td class="pattern-id">2 bars</td><td class="pattern-name">32</td><td class="pattern-use">8</td><td class="pattern-use">×8</td><td class="pattern-use">Build-up tension</td></tr>
+                                <tr><td class="pattern-id">4 bars</td><td class="pattern-name">64</td><td class="pattern-use">4</td><td class="pattern-use">×8</td><td class="pattern-use">Section transitions</td></tr>
+                                <tr><td class="pattern-id">8 bars</td><td class="pattern-name">128</td><td class="pattern-use">2</td><td class="pattern-use">×8</td><td class="pattern-use">Slow evolving textures</td></tr>
+                                <tr><td class="pattern-id">16 bars</td><td class="pattern-name">256</td><td class="pattern-use">1</td><td class="pattern-use">×8</td><td class="pattern-use">Full pattern automation</td></tr>
+                            </table>
+                            <div class="tip-box">
+                                <strong>💡 LFO Trick:</strong> Set SPD to -64, SPH (phase) to 127, then MULT directly equals note divisions: ×16 = 1/16, ×4 = 1/4, ×1 = 1 bar. Use ENV waveform + TRG mode for one-shot automation rises that restart each pattern.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2220,6 +2388,22 @@
                                 <tr><td class="pattern-id">Stabs</td><td class="pattern-name">Multi Player</td><td class="pattern-use">One-shot | Delay send: 25%</td></tr>
                             </table>
                         </div>
+
+                        <div class="setup-section">
+                            <h3>LFO Timing Reference (One-Shot Ramp for Automation)</h3>
+                            <p style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">SPD × MULT = cycle length. Use ENV waveform for one-shot rises, TRG mode to restart on pattern start.</p>
+                            <table class="pattern-table">
+                                <tr><th>Cycle Length</th><th>Steps</th><th>SPD</th><th>MULT</th><th>Use Case</th></tr>
+                                <tr><td class="pattern-id">1 bar</td><td class="pattern-name">16</td><td class="pattern-use">16</td><td class="pattern-use">×8</td><td class="pattern-use">Fast filter sweeps</td></tr>
+                                <tr><td class="pattern-id">2 bars</td><td class="pattern-name">32</td><td class="pattern-use">8</td><td class="pattern-use">×8</td><td class="pattern-use">Build-up tension</td></tr>
+                                <tr><td class="pattern-id">4 bars</td><td class="pattern-name">64</td><td class="pattern-use">4</td><td class="pattern-use">×8</td><td class="pattern-use">Section transitions</td></tr>
+                                <tr><td class="pattern-id">8 bars</td><td class="pattern-name">128</td><td class="pattern-use">2</td><td class="pattern-use">×8</td><td class="pattern-use">Slow evolving textures</td></tr>
+                                <tr><td class="pattern-id">16 bars</td><td class="pattern-name">256</td><td class="pattern-use">1</td><td class="pattern-use">×8</td><td class="pattern-use">Full pattern automation</td></tr>
+                            </table>
+                            <div class="tip-box">
+                                <strong>💡 LFO Trick:</strong> Set SPD to -64, SPH (phase) to 127, then MULT directly equals note divisions: ×16 = 1/16, ×4 = 1/4, ×1 = 1 bar. Use ENV waveform + TRG mode for one-shot automation rises that restart each pattern.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2494,6 +2678,22 @@
                                 <tr><td class="pattern-id">T5 Perc</td><td class="pattern-name">Bus Send A</td><td class="pattern-use">15% → 60% for builds</td></tr>
                                 <tr><td class="pattern-id">T6 Chords</td><td class="pattern-name">Decay/Release</td><td class="pattern-use">Short stabs → long pads</td></tr>
                             </table>
+                        </div>
+
+                        <div class="setup-section">
+                            <h3>LFO Timing Reference (One-Shot Ramp for Automation)</h3>
+                            <p style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">SPD × MULT = cycle length. Use ENV waveform for one-shot rises, TRG mode to restart on pattern start.</p>
+                            <table class="pattern-table">
+                                <tr><th>Cycle Length</th><th>Steps</th><th>SPD</th><th>MULT</th><th>Use Case</th></tr>
+                                <tr><td class="pattern-id">1 bar</td><td class="pattern-name">16</td><td class="pattern-use">16</td><td class="pattern-use">×8</td><td class="pattern-use">Fast filter sweeps</td></tr>
+                                <tr><td class="pattern-id">2 bars</td><td class="pattern-name">32</td><td class="pattern-use">8</td><td class="pattern-use">×8</td><td class="pattern-use">Build-up tension</td></tr>
+                                <tr><td class="pattern-id">4 bars</td><td class="pattern-name">64</td><td class="pattern-use">4</td><td class="pattern-use">×8</td><td class="pattern-use">Section transitions</td></tr>
+                                <tr><td class="pattern-id">8 bars</td><td class="pattern-name">128</td><td class="pattern-use">2</td><td class="pattern-use">×8</td><td class="pattern-use">Slow evolving textures</td></tr>
+                                <tr><td class="pattern-id">16 bars</td><td class="pattern-name">256</td><td class="pattern-use">1</td><td class="pattern-use">×8</td><td class="pattern-use">Full pattern automation</td></tr>
+                            </table>
+                            <div class="tip-box">
+                                <strong>💡 LFO Trick:</strong> Set SPD to -64, SPH (phase) to 127, then MULT directly equals note divisions: ×16 = 1/16, ×4 = 1/4, ×1 = 1 bar. Use ENV waveform + TRG mode for one-shot automation rises that restart each pattern.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2793,6 +2993,22 @@
                                 <tr><td class="pattern-name">Reverb Send</td><td class="pattern-use">20% → 70%</td><td class="pattern-use">Max on breakdowns</td></tr>
                                 <tr><td class="pattern-name">Delay Feedback</td><td class="pattern-use">35% → 70%</td><td class="pattern-use">Increase for breakdown wash</td></tr>
                             </table>
+                        </div>
+
+                        <div class="setup-section">
+                            <h3>LFO Timing Reference (One-Shot Ramp for Automation)</h3>
+                            <p style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">SPD × MULT = cycle length. Use ENV waveform for one-shot rises, TRG mode to restart on pattern start.</p>
+                            <table class="pattern-table">
+                                <tr><th>Cycle Length</th><th>Steps</th><th>SPD</th><th>MULT</th><th>Use Case</th></tr>
+                                <tr><td class="pattern-id">1 bar</td><td class="pattern-name">16</td><td class="pattern-use">16</td><td class="pattern-use">×8</td><td class="pattern-use">Fast filter sweeps</td></tr>
+                                <tr><td class="pattern-id">2 bars</td><td class="pattern-name">32</td><td class="pattern-use">8</td><td class="pattern-use">×8</td><td class="pattern-use">Build-up tension</td></tr>
+                                <tr><td class="pattern-id">4 bars</td><td class="pattern-name">64</td><td class="pattern-use">4</td><td class="pattern-use">×8</td><td class="pattern-use">Section transitions</td></tr>
+                                <tr><td class="pattern-id">8 bars</td><td class="pattern-name">128</td><td class="pattern-use">2</td><td class="pattern-use">×8</td><td class="pattern-use">Slow evolving textures</td></tr>
+                                <tr><td class="pattern-id">16 bars</td><td class="pattern-name">256</td><td class="pattern-use">1</td><td class="pattern-use">×8</td><td class="pattern-use">Full pattern automation</td></tr>
+                            </table>
+                            <div class="tip-box">
+                                <strong>💡 LFO Trick:</strong> Set SPD to -64, SPH (phase) to 127, then MULT directly equals note divisions: ×16 = 1/16, ×4 = 1/4, ×1 = 1 bar. Use ENV waveform + TRG mode for one-shot automation rises that restart each pattern.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3112,6 +3328,22 @@
                                 <tr><td class="pattern-name">Kick Click</td><td class="pattern-use">2-4kHz</td><td class="pattern-use">Transient attack</td></tr>
                             </table>
                         </div>
+
+                        <div class="setup-section">
+                            <h3>LFO Timing Reference (One-Shot Ramp for Automation)</h3>
+                            <p style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">SPD × MULT = cycle length. Use ENV waveform for one-shot rises, TRG mode to restart on pattern start.</p>
+                            <table class="pattern-table">
+                                <tr><th>Cycle Length</th><th>Steps</th><th>SPD</th><th>MULT</th><th>Use Case</th></tr>
+                                <tr><td class="pattern-id">1 bar</td><td class="pattern-name">16</td><td class="pattern-use">16</td><td class="pattern-use">×8</td><td class="pattern-use">Fast filter sweeps</td></tr>
+                                <tr><td class="pattern-id">2 bars</td><td class="pattern-name">32</td><td class="pattern-use">8</td><td class="pattern-use">×8</td><td class="pattern-use">Build-up tension</td></tr>
+                                <tr><td class="pattern-id">4 bars</td><td class="pattern-name">64</td><td class="pattern-use">4</td><td class="pattern-use">×8</td><td class="pattern-use">Section transitions</td></tr>
+                                <tr><td class="pattern-id">8 bars</td><td class="pattern-name">128</td><td class="pattern-use">2</td><td class="pattern-use">×8</td><td class="pattern-use">Slow evolving textures</td></tr>
+                                <tr><td class="pattern-id">16 bars</td><td class="pattern-name">256</td><td class="pattern-use">1</td><td class="pattern-use">×8</td><td class="pattern-use">Full pattern automation</td></tr>
+                            </table>
+                            <div class="tip-box">
+                                <strong>💡 LFO Trick:</strong> Set SPD to -64, SPH (phase) to 127, then MULT directly equals note divisions: ×16 = 1/16, ×4 = 1/4, ×1 = 1 bar. Use ENV waveform + TRG mode for one-shot automation rises that restart each pattern.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3267,6 +3499,22 @@
                                 <tr><td class="pattern-id">Toms</td><td class="pattern-name">Tuned to key (C-F), pitch decay 200ms</td><td class="pattern-use">Melodic percussion</td></tr>
                                 <tr><td class="pattern-id">Bass</td><td class="pattern-name">Square/saw, LP filter with res, Freq Warper modulation</td><td class="pattern-use">Wobbly, bouncy weight</td></tr>
                             </table>
+                        </div>
+
+                        <div class="setup-section">
+                            <h3>LFO Timing Reference (One-Shot Ramp for Automation)</h3>
+                            <p style="font-size: 11px; color: #9ca3af; margin-bottom: 8px;">SPD × MULT = cycle length. Use ENV waveform for one-shot rises, TRG mode to restart on pattern start.</p>
+                            <table class="pattern-table">
+                                <tr><th>Cycle Length</th><th>Steps</th><th>SPD</th><th>MULT</th><th>Use Case</th></tr>
+                                <tr><td class="pattern-id">1 bar</td><td class="pattern-name">16</td><td class="pattern-use">16</td><td class="pattern-use">×8</td><td class="pattern-use">Fast filter sweeps</td></tr>
+                                <tr><td class="pattern-id">2 bars</td><td class="pattern-name">32</td><td class="pattern-use">8</td><td class="pattern-use">×8</td><td class="pattern-use">Build-up tension</td></tr>
+                                <tr><td class="pattern-id">4 bars</td><td class="pattern-name">64</td><td class="pattern-use">4</td><td class="pattern-use">×8</td><td class="pattern-use">Section transitions</td></tr>
+                                <tr><td class="pattern-id">8 bars</td><td class="pattern-name">128</td><td class="pattern-use">2</td><td class="pattern-use">×8</td><td class="pattern-use">Slow evolving textures</td></tr>
+                                <tr><td class="pattern-id">16 bars</td><td class="pattern-name">256</td><td class="pattern-use">1</td><td class="pattern-use">×8</td><td class="pattern-use">Full pattern automation</td></tr>
+                            </table>
+                            <div class="tip-box">
+                                <strong>💡 LFO Trick:</strong> Set SPD to -64, SPH (phase) to 127, then MULT directly equals note divisions: ×16 = 1/16, ×4 = 1/4, ×1 = 1 bar. Use ENV waveform + TRG mode for one-shot automation rises that restart each pattern.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -7373,9 +7621,14 @@
                     fillD += ` L ${x} ${y}`;
                 }
                 
+                // Get previous point data for LFO calculation
+                const prevPoint = i > 0 ? auto.points[i - 1] : null;
+                const prevBar = prevPoint ? prevPoint.bar : point.bar;
+                const prevValue = prevPoint ? prevPoint.value : point.value;
+                
                 // Add interactive point
                 pointsHtml += `<circle class="auto-point" cx="${x}" cy="${y}" r="4" fill="${auto.color}" 
-                    onmouseenter="showAutoTooltip(event, '${auto.name}', ${point.bar}, ${point.value})"
+                    onmouseenter="showAutoTooltip(event, '${auto.name}', ${point.bar}, ${point.value}, ${prevBar}, ${prevValue})"
                     onmouseleave="hideAutoTooltip()"
                     onmousemove="moveAutoTooltip(event)"/>`;
             });
@@ -7422,9 +7675,14 @@
                     fillD += ` L ${x} ${y}`;
                 }
                 
+                // Get previous point data for LFO calculation
+                const prevPoint = i > 0 ? lane.points[i - 1] : null;
+                const prevBar = prevPoint ? prevPoint.bar : point.bar;
+                const prevValue = prevPoint ? prevPoint.value : point.value;
+                
                 // Add interactive point
                 pointsHtml += `<circle class="auto-point" cx="${x}" cy="${y}" r="4" fill="${lane.color}" 
-                    onmouseenter="showAutoTooltip(event, '${lane.name}', ${point.bar}, ${point.value})"
+                    onmouseenter="showAutoTooltip(event, '${lane.name}', ${point.bar}, ${point.value}, ${prevBar}, ${prevValue})"
                     onmouseleave="hideAutoTooltip()"
                     onmousemove="moveAutoTooltip(event)"/>`;
             });
@@ -7666,12 +7924,78 @@
             });
         }
 
-        function showAutoTooltip(e, param, bar, value) {
+        function getPatternAndStep(bar) {
+            const trackData = tracks[currentTrack];
+            if (!trackData || !trackData.songRows) {
+                return { pattern: '???', step: 1 };
+            }
+            
+            // Each song row = 16 bars = 256 steps
+            const barsPerPattern = 16;
+            const stepsPerBar = 16;
+            
+            // Which song row does this bar fall into?
+            const songRowIndex = Math.floor((bar - 1) / barsPerPattern);
+            const songRow = trackData.songRows[songRowIndex];
+            
+            // What bar within that pattern? (1-16)
+            const barInPattern = ((bar - 1) % barsPerPattern) + 1;
+            
+            // What step? (1-256)
+            const step = ((barInPattern - 1) * stepsPerBar) + 1;
+            
+            return {
+                pattern: songRow ? songRow.pattern : '???',
+                step: step
+            };
+        }
+
+        function getLfoSettings(bars) {
+            // Calculate SPD and MULT for given bar count
+            // Formula: SPD × MULT = 128 / bars (for one cycle over that many bars)
+            // Using MULT ×8 as base, SPD = 16 / bars
+            if (bars <= 1) return { spd: 16, mult: '×8', note: '1 bar' };
+            if (bars <= 2) return { spd: 8, mult: '×8', note: '2 bars' };
+            if (bars <= 4) return { spd: 4, mult: '×8', note: '4 bars' };
+            if (bars <= 8) return { spd: 2, mult: '×8', note: '8 bars' };
+            if (bars <= 16) return { spd: 1, mult: '×8', note: '16 bars' };
+            if (bars <= 32) return { spd: 1, mult: '×4', note: '32 bars' };
+            return { spd: 1, mult: '×2', note: '64 bars' };
+        }
+
+        function showAutoTooltip(e, param, bar, value, prevBar, prevValue) {
             const tooltip = document.getElementById('auto-tooltip');
-            tooltip.innerHTML = `
+            const { pattern, step } = getPatternAndStep(bar);
+            
+            // Calculate change from previous point
+            const valueDiff = value - prevValue;
+            const barDiff = bar - prevBar;
+            const direction = valueDiff > 0 ? '↑' : valueDiff < 0 ? '↓' : '—';
+            const absValueDiff = Math.abs(valueDiff);
+            
+            // Get LFO settings for this duration
+            const lfo = getLfoSettings(barDiff);
+            
+            // Build tooltip content
+            let html = `
                 <div><span class="auto-param">${param}</span></div>
+                <div><strong>Pattern ${pattern}, Step ${step}</strong></div>
                 <div>Bar <span class="auto-bar">${bar}</span> → <span class="auto-value">${value}%</span></div>
             `;
+            
+            // Add LFO info if there's a change
+            if (barDiff > 0 && absValueDiff > 0) {
+                html += `
+                    <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.2);">
+                        <span style="color: #fbbf24;">${direction} ${absValueDiff}%</span> over <span style="color: #a78bfa;">${barDiff} bars</span>
+                    </div>
+                    <div style="color: #4ade80; font-size: 10px;">
+                        LFO: SPD ${lfo.spd}, MULT ${lfo.mult}, DEP ${absValueDiff}
+                    </div>
+                `;
+            }
+            
+            tooltip.innerHTML = html;
             tooltip.classList.add('visible');
             moveAutoTooltip(e);
         }
